@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分析型智能体 Web POC</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="chat-header">
+            <h1>🤖增长洞察智能体-POC🤖</h1>
+            <p class="subtitle">比价 → 购买决策 → 完成购买</p>
+        </div>
+        
+        <div class="chat-container">
+            <div id="messages" class="messages"></div>
+            
+            <div class="suggestions-container" id="suggestions-container">
+                <p class="suggestions-label">建议问题：</p>
+                <div class="suggestions" id="suggestions"></div>
+            </div>
+            
+            <div class="input-container">
+                <input type="text" id="input" placeholder="输入您的问题..." />
+                <button id="send-btn">发送</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="{{ url_for('product_roadmap') }}" class="nav-link-text">🔮🔮🔮</a>
+        <a href="{{ url_for('roadmap') }}" class="nav-link-text">🧬🧬🧬</a>
+    </nav>
+    
+    <script src="{{ url_for('static', filename='app.js') }}?v=2.0"></script>
+</body>
+</html>

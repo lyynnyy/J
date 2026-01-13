@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      # 挂载数据目录，确保数据库持久化
+      - ./demo.db:/app/demo.db
+      - ./state.json:/app/state.json
+    environment:
+      - SECRET_KEY=${SECRET_KEY:-baa6261_secret_key_2024}
+      - PASSWORD=${PASSWORD:-baa6261}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

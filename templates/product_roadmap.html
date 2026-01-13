@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>产品 Roadmap（V1 → V3）</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container roadmap-container">
+        <!-- Header -->
+        <header class="header roadmap-header">
+            <div>
+                <h1>产品 Roadmap（V1 → V3）</h1>
+                <p class="subtitle">分析型智能体的产品演进路线（模式驱动分析）</p>
+            </div>
+            <button id="toggleAllPhasesBtn" class="btn-secondary">展开/折叠全部</button>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content roadmap-main">
+            <!-- Phase 0 -->
+            <section id="phase0" class="phase-card phase-accordion">
+                <div class="phase-header phase-header-dark" data-phase="phase0">
+                    <div class="phase-header-left">
+                        <div class="phase-header-top">
+                            <h2>Phase 0（已完成）</h2>
+                            <span class="phase-status status-completed">已完成</span>
+                        </div>
+                        <div class="phase-collapsed-info">
+                            <span class="phase-goal">目标：验证"分析闭环是否成立"</span>
+                        </div>
+                    </div>
+                    <span class="phase-toggle">▼</span>
+                </div>
+                <div class="phase-content">
+                    <div class="phase-section">
+                        <h3>目标（Goal）</h3>
+                        <p>验证"分析闭环是否成立"</p>
+                    </div>
+                    <div class="phase-section">
+                        <h3>对应工程</h3>
+                        <p>Step 0</p>
+                    </div>
+                    <div class="phase-section">
+                        <h3>核心能力（Capabilities）</h3>
+                        <ul>
+                            <li>固定问题 → 结论卡（L0）</li>
+                            <li>引导下钻 → 再结论（C3 → C31/C32）</li>
+                            <li>并行问题识别（无效路径 + 偏好不匹配）</li>
+                            <li>不依赖大模型</li>
+                        </ul>
+                    </div>
+                    <div class="phase-section">
+                        <h3>产出物（Deliverables）</h3>
+                        <ul>
+                            <li>最小可运行 Web Demo</li>
+                            <li>C3 双问题 + C31/C32 完整闭环</li>
+                            <li>初版工程看板</li>
+                        </ul>
+                    </div>
+                    <div class="phase-section">
+                        <h3>里程碑（Milestones / Exit Criteria）</h3>
+                        <p>无需大模型也能稳定输出可指导运营决策的结论</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Phase 1 -->
+            <section id="phase1" class="phase-card phase-accordion">
+                <div class="phase-header phase-header-dark" data-phase="phase1">
+                    <div class="phase-header-left">
+                        <div class="phase-header-top">
+                            <h2>Phase 1（当前阶段）</h2>
+                            <span class="phase-status status-in-progress">进行中</span>
+                        </div>
+                        <div class="phase-collapsed-info">
+                            <span class="phase-goal">目标：从"一次分析"升级为"分析模式产品"</span>
+                        </div>
+                    </div>
+                    <span class="phase-toggle">▼</span>
+                </div>
+                <div class="phase-content">
+                    <div class="phase-section">
+                        <h3>目标（Goal）</h3>
+                        <p>从"一次分析"升级为"分析模式产品"</p>
+                    </div>
+                    <div class="phase-section">
+                        <h3>对应工程</h3>
+                        <p>Step 1–4</p>
+                    </div>
+                    <div class="phase-section">
+                        <h3>核心能力（Capabilities）</h3>
+                        <div class="sub-phase">
+                            <h4>Phase 1.1 分析模式化（Pattern-driven Analysis）</h4>
+                            <ul>
+                                <li>引入 Pattern Registry</li>
+                                <li>将 C3 双问题抽象为 P-DEC-01</li>
+                                <li><strong>价值：</strong>分析从"写死逻辑"升级为"套用模式"</li>
+                            </ul>
+                        </div>
+                        <div class="sub-phase">
+                            <h4>Phase 1.2 下钻标准化（Drill as Capability）</h4>
+                            <ul>
+                                <li>Drill Contract：定义下钻依赖证据与导向动作</li>
+                                <li><strong>价值：</strong>防止无穷下钻、下钻可控</li>
+                            </ul>
+                        </div>
+                        <div class="sub-phase">
+                            <h4>Phase 1.3 证据可信性（Evidence-first）</h4>
+                            <ul>
+                                <li>Evidence Contract：无证据不下强结论，可审计可追溯</li>
+                            </ul>
+                        </div>
+                        <div class="sub-phase">
+                            <h4>Phase 1.4 分析 → 运营（Action Mapping）</h4>
+                            <ul>
+                                <li>Action Contract：输出 UI 优化、人群条件、商品/内容策略</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="phase-section">
+                        <h3>完成标志（Exit Criteria）</h3>
+                        <p>新增场景不是写 SQL，而是新增 Pattern + Drill</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Phase 2 -->
+            <section id="phase2" class="phase-card phase-accordion">
+                <div class="phase-header phase-header-dark" data-phase="phase2">
+                    <div class="phase-header-left">
+                        <div class="phase-header-top">
+                            <h2>Phase 2（下一阶段）</h2>
+                            <span class="phase-status status-planned">规划中</span>
+                        </div>
+                        <div class="phase-collapsed-info">
+                            <span class="phase-goal">目标：让系统"听懂人话"，不破坏可信性</span>
+                        </div>
+                    </div>
+                    <span class="phase-toggle">▼</span>
+                </div>
+                <div class="phase-content">
+                    <div class="phase-section">
+                        <h3>目标（Goal）</h3>
+                        <p>让系统"听懂人话"，不破坏可信性</p>
+                    </div>
+                    <div class="phase-section">
+                        <h3>核心能力（Capabilities）</h3>
+                        <div class="sub-phase">
+                            <h4>Phase 2.1 自然语言 → 分析模式选择</h4>
+                            <ul>
+                                <li>LLM 只负责选择 Pattern，生成 analysis_plan（JSON）</li>
+                                <li>不计算指标、不下结论</li>
+                            </ul>
+                        </div>
+                        <div class="sub-phase">
+                            <h4>Phase 2.2 智能下钻推荐（可选）</h4>
+                            <ul>
+                                <li>基于 evidence 推荐最有价值下钻</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="phase-section">
+                        <h3>成功标准（Success Criteria）</h3>
+                        <p>即使 LLM 出错，系统也不会输出不可解释结论</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Phase 3 -->
+            <section id="phase3" class="phase-card phase-accordion">
+                <div class="phase-header phase-header-dark" data-phase="phase3">
+                    <div class="phase-header-left">
+                        <div class="phase-header-top">
+                            <h2>Phase 3（中长期）</h2>
+                            <span class="phase-status status-reserved">预留</span>
+                        </div>
+                        <div class="phase-collapsed-info">
+                            <span class="phase-goal">目标：从"分析工具"进化为"增长智能系统"</span>
+                        </div>
+                    </div>
+                    <span class="phase-toggle">▼</span>
+                </div>
+                <div class="phase-content">
+                    <div class="phase-section">
+                        <h3>目标（Goal）</h3>
+                        <p>从"分析工具"进化为"增长智能系统"</p>
+                    </div>
+                    <div class="phase-section">
+                        <h3>核心能力（Capabilities）</h3>
+                        <div class="sub-phase">
+                            <h4>Phase 3.1 模式库（Pattern Library）</h4>
+                            <ul>
+                                <li>多 Pattern 共存：P-DEC / P-ACQ / P-RET</li>
+                            </ul>
+                        </div>
+                        <div class="sub-phase">
+                            <h4>Phase 3.2 跨案例归纳（真正 AI 的地方）</h4>
+                            <ul>
+                                <li>总结常见问题组合、常见高价值动作</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="phase-section">
+                        <h3>输出（Output）</h3>
+                        <p>系统开始沉淀客户共性与可复制策略</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Summary -->
+            <section id="summary" class="summary-card-compact">
+                <div class="summary-header">
+                    <h2>一页总结</h2>
+                </div>
+                <div class="summary-content">
+                    <p><strong>V1：</strong>分析闭环是否成立？</p>
+                    <p><strong>V2：</strong>分析是否可复用、可规模化？</p>
+                    <p><strong>V3：</strong>分析是否能听懂人话、形成长期智能？</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Back to Home Link -->
+    <div class="back-home-link">
+        <a href="{{ url_for('index') }}">🛹🛹🛹</a>
+    </div>
+
+    <script>
+        // Phase 折叠功能
+        const expandedPhases = new Set(['phase0', 'phase1', 'phase2', 'phase3']); // 默认全部展开
+        
+        function togglePhase(phaseId) {
+            const phaseCard = document.querySelector(`[data-phase="${phaseId}"]`).closest('.phase-accordion');
+            const phaseContent = phaseCard.querySelector('.phase-content');
+            const phaseCollapsed = phaseCard.querySelector('.phase-collapsed-info');
+            const toggle = phaseCard.querySelector('.phase-toggle');
+            
+            if (expandedPhases.has(phaseId)) {
+                expandedPhases.delete(phaseId);
+                phaseCard.classList.add('collapsed');
+                phaseContent.style.display = 'none';
+                phaseCollapsed.style.display = 'flex';
+                toggle.textContent = '▶';
+            } else {
+                expandedPhases.add(phaseId);
+                phaseCard.classList.remove('collapsed');
+                phaseContent.style.display = 'block';
+                phaseCollapsed.style.display = 'none';
+                toggle.textContent = '▼';
+            }
+        }
+        
+        document.querySelectorAll('.phase-header').forEach(header => {
+            header.addEventListener('click', function() {
+                const phaseId = this.getAttribute('data-phase');
+                togglePhase(phaseId);
+            });
+        });
+        
+        // 展开/折叠全部按钮
+        const toggleAllBtn = document.getElementById('toggleAllPhasesBtn');
+        toggleAllBtn.addEventListener('click', function() {
+            const allPhases = ['phase0', 'phase1', 'phase2', 'phase3'];
+            const allExpanded = allPhases.every(phase => expandedPhases.has(phase));
+            
+            allPhases.forEach(phaseId => {
+                if (allExpanded) {
+                    // 全部折叠
+                    if (expandedPhases.has(phaseId)) {
+                        togglePhase(phaseId);
+                    }
+                } else {
+                    // 全部展开
+                    if (!expandedPhases.has(phaseId)) {
+                        togglePhase(phaseId);
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

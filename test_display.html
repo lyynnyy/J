@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>测试显示</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        .test-section h3 { color: #667eea; margin-bottom: 10px; }
+        .test-data { background: #f5f5f5; padding: 10px; border-radius: 5px; margin: 10px 0; }
+        .success { color: green; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>前端显示测试</h1>
+    
+    <div class="test-section">
+        <h3>测试C3 API返回</h3>
+        <button onclick="testC3API()">测试C3 API</button>
+        <div id="api-result" class="test-data"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>测试前端显示</h3>
+        <button onclick="testFrontendDisplay()">测试前端显示</button>
+        <div id="display-result" class="test-data"></div>
+    </div>
+    
+    <script>
+        async function testC3API() {
+            const resultDiv = document.getElementById('api-result');
+            resultDiv.innerHTML = '正在测试...';
+            
+            try {
+                const response = await fetch('/api/drill', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ card_id: 'C3' })
+                });
+                
+                const data = await response.json();
+                
+                let html = '<h4 class="success">API返回成功！</h4>';
+                html += '<p><strong>结论:</strong> ' + data.conclusion + '</p>';
+                html += '<p><strong>证据数量:</strong> ' + (data.evidence ? data.evidence.length : 0) + '</p>';
+                if (data.evidence) {
+                    html += '<ul>';
+                    data.evidence.forEach(ev => {
+                        html += '<li>' + ev + '</li>';
+                    });
+                    html += '</ul>';
+                }
+                html += '<p><strong>下钻卡数量:</strong> ' + (data.next_drill_cards ? data.next_drill_cards.length : 0) + '</p>';
+                if (data.next_drill_cards) {
+                    html += '<ul>';
+                    data.next_drill_cards.forEach(card => {
+                        html += '<li>' + card.id + ': ' + card.title + '</li>';
+                    });
+                    html += '</ul>';
+                }
+                html += '<p><strong>运营策略存在:</strong> ' + (data.actions ? '是' : '否') + '</p>';
+                if (data.actions) {
+                    html += '<p><strong>UI策略数量:</strong> ' + (data.actions.ui_actions ? data.actions.ui_actions.length : 0) + '</p>';
+                    html += '<p><strong>人群策略存在:</strong> ' + (data.actions.audience_building ? '是' : '否') + '</p>';
+                    html += '<p><strong>商品策略存在:</strong> ' + (data.actions.merch_strategy ? '是' : '否') + '</p>';
+                }
+                html += '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+                
+                resultDiv.innerHTML = html;
+            } catch (error) {
+                resultDiv.innerHTML = '<p class="error">错误: ' + error.message + '</p>';
+            }
+        }
+        
+        function testFrontendDisplay() {
+            const resultDiv = document.getElementById('display-result');
+            resultDiv.innerHTML = '正在测试...';
+            
+            // 模拟数据
+            const testData = {
+                type: 'drill_result',
+                level: 'L2',
+                drill: {
+                    card_id: 'C3',
+                    title: '购买决策细分下钻'
+                },
+                conclusion: '在进入决策阶段但未购买的用户中（共7人），发现两类问题：\n【问题A】无效页面浏览过多：平均无效浏览 4.86次\n【问题B】列表无点击：2人到达商品列表页（category），其中2人（100.0%）未点击任何商品',
+                evidence: [
+                    '问题A - 无效浏览：平均 4.86次无效浏览',
+                    'Top无效页面：home(24次, 6人), product(8次, 6人), category(2次, 2人)',
+                    '问题B - 列表无点击：2人到达category，2人未点击商品（100.0%）',
+                    '平均曝光商品数：3.0个'
+                ],
+                next_drill_cards: [
+                    { id: 'C31', title: '无效页面名称下钻', description: '查看Top无效页面，用于UI调整/删除页面' },
+                    { id: 'C32', title: '未点击商品用户偏好下钻', description: '分析"到达列表页但未点击商品"用户的历史购买偏好' }
+                ],
+                actions: {
+                    ui_actions: [
+                        '删除/合并无效页面：home（24次浏览，6人）',
+                        '优化路径：减少回首页路径，增加直达列表页入口',
+                        '考虑合并相似页面：home, product'
+                    ],
+                    audience_building: {
+                        period: 'curr_7d',
+                        journey_id: 'J_BUY',
+                        in_decide: 1,
+                        no_purchase: 1,
+                        reached_category: 1,
+                        item_click: 0,
+                        audience_size: 2
+                    },
+                    merch_strategy: {
+                        note: '商品策略需通过C32下钻获取历史购买偏好后生成'
+                    }
+                }
+            };
+            
+            // 测试显示逻辑
+            let html = '<h4>测试前端显示逻辑</h4>';
+            
+            // 测试结论
+            html += '<p><strong>结论显示:</strong></p>';
+            html += '<div style="background: white; padding: 10px; border-radius: 5px; margin: 10px 0; white-space: pre-line;">' + testData.conclusion + '</div>';
+            
+            // 测试证据
+            html += '<p><strong>证据显示:</strong></p>';
+            html += '<ul>';
+            testData.evidence.forEach(ev => {
+                html += '<li>' + ev + '</li>';
+            });
+            html += '</ul>';
+            
+            // 测试下钻卡
+            html += '<p><strong>下钻卡显示:</strong></p>';
+            html += '<div style="display: flex; gap: 10px; flex-wrap: wrap;">';
+            testData.next_drill_cards.forEach(card => {
+                html += '<div style="background: #667eea; color: white; padding: 12px; border-radius: 8px; cursor: pointer;">';
+                html += '<div style="font-weight: bold;">' + card.title + '</div>';
+                html += '<div style="font-size: 12px; opacity: 0.9;">' + card.description + '</div>';
+                html += '</div>';
+            });
+            html += '</div>';
+            
+            // 测试运营策略
+            html += '<p><strong>运营策略显示:</strong></p>';
+            html += '<div style="background: #f0f8ff; padding: 15px; border-radius: 5px; border: 1px solid #d0e8ff;">';
+            if (testData.actions.ui_actions) {
+                html += '<div style="font-weight: bold; margin-top: 10px;">UI策略：</div>';
+                testData.actions.ui_actions.forEach(action => {
+                    html += '<div style="margin-left: 15px; margin-bottom: 5px;">' + action + '</div>';
+                });
+            }
+            if (testData.actions.audience_building) {
+                html += '<div style="font-weight: bold; margin-top: 10px;">人群策略（筛选条件）：</div>';
+                html += '<pre style="margin-left: 15px; font-size: 12px;">' + JSON.stringify(testData.actions.audience_building, null, 2) + '</pre>';
+            }
+            if (testData.actions.merch_strategy) {
+                html += '<div style="font-weight: bold; margin-top: 10px;">商品策略：</div>';
+                html += '<div style="margin-left: 15px;">' + JSON.stringify(testData.actions.merch_strategy, null, 2) + '</div>';
+            }
+            html += '</div>';
+            
+            resultDiv.innerHTML = html;
+        }
+    </script>
+</body>
+</html>

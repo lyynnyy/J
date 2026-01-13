@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# Flask
+instance/
+.webassets-cache
+
+# 数据库文件（如果包含敏感数据，建议不提交）
+*.db
+*.sqlite
+*.sqlite3
+demo.db
+
+# 环境变量
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 日志文件
+*.log
+
+# 状态文件（可选，根据需求决定是否提交）
+# state.json
+
+# 临时文件
+*.tmp
+*.temp

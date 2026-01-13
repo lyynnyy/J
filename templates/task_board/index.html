@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分析型智能体 · 工程任务看板</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='task_board/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>分析型智能体 · 工程任务看板（Cursor 启动器）</h1>
+            <div class="controls">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="搜索任务（标题/目标/状态/LLM说明/任务拆分）..." />
+                </div>
+                <div class="filter-box">
+                    <select id="stepFilter">
+                        <option value="ALL">所有步骤</option>
+                    </select>
+                </div>
+                <button id="toggleAllBtn" class="btn-secondary">展开/折叠全部</button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content" id="mainContent">
+            <!-- 任务列表将通过 JS 动态渲染 -->
+            <div class="loading">加载任务数据中...</div>
+        </main>
+
+        <!-- Toast 提示 -->
+        <div id="toast" class="toast"></div>
+    </div>
+
+    <!-- Back to Home Link -->
+    <div class="back-home-link">
+        <a href="{{ url_for('index') }}">🛹🛹🛹</a>
+    </div>
+
+    <script type="module" src="{{ url_for('static', filename='task_board/app.js') }}"></script>
+</body>
+</html>
