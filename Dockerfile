@@ -29,5 +29,5 @@ RUN python3 db_build.py
 # 暴露端口
 EXPOSE 5000
 
-# 使用 gunicorn 启动应用
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "4", "web_app:app"]
+# 使用 gunicorn 启动应用（使用环境变量 PORT）
+CMD sh -c "gunicorn --bind 0.0.0.0:\${PORT:-5000} --workers 4 web_app:app"
